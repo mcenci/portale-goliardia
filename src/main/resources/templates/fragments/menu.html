@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+    	<nav class="navbar navbar-default navbar-expand-lg navbar-light" th:fragment="not-loggedin-menu">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><b>Goliardia</b>.it</a>  		
+			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+				<span class="navbar-toggler-icon"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<!-- Collection of nav links, forms, and other content for toggling -->
+		<div id="navbarCollapse" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>			
+<!-- 				<li class="dropdown"> -->
+<!-- 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">Services <b class="caret"></b></a> -->
+<!-- 					<ul class="dropdown-menu">					 -->
+<!-- 						<li><a href="#">Web Design</a></li> -->
+<!-- 						<li><a href="#">Web Development</a></li> -->
+<!-- 						<li><a href="#">Graphic Design</a></li> -->
+<!-- 						<li><a href="#">Digital Marketing</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</li> -->
+				<li class="active"><a href="#">Pricing</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">			
+				<li>
+					<a data-toggle="dropdown" class="dropdown-toggle" href="#" id="login">Login</a>
+					<ul class="dropdown-menu form-wrapper">					
+						<li>
+							<form th:action="@{/login}" method="post">
+								<p class="hint-text">Accedi con il tuo account Social</p>
+								<div class="form-group social-btn clearfix">
+									<a href="#" class="btn btn-primary pull-left"><i class="fas fa-facebook"></i> Facebook</a>
+									<a href="#" class="btn btn-info pull-right"><i class="fas fa-twitter"></i> Twitter</a>
+								</div>
+								<div class="or-seperator"><b>o</b></div>
+								<div th:if="${param.error}" th:id="${param.error} ? 'login-error' : ''">
+				                    <div class="alert alert-danger">
+				                        Nome utente o Password errato.
+				                    </div>
+				                </div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
+								</div>
+								<input type="submit" class="btn btn-primary btn-block" value="Accedi">
+								<div class="form-footer">
+									<a href="#">Password Dimenticata?</a>
+								</div>
+							</form>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Registrati</a>
+					<ul class="dropdown-menu form-wrapper">					
+						<li>
+							<form th:action="@{/register}" method="post">
+								<p class="hint-text">Compila il form per creare l'account!</p>
+								<div class="form-group">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="password2" name="password2" placeholder="Conferma Password" required="required">
+								</div>
+								<div class="form-group">
+									<label class="checkbox-inline"><input type="checkbox" required="required"> Accetto i <a href="#">Termini &amp; Condizioni</a></label>
+								</div>
+								<input type="submit" class="btn btn-primary btn-block" value="Registrati">
+							</form>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<nav class="navbar navbar-default navbar-expand-lg navbar-light" th:fragment="loggedin-menu">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><b>Goliardia</b>.it</a>  		
+			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+				<span class="navbar-toggler-icon"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<!-- Collection of nav links, forms, and other content for toggling -->
+		<div id="navbarCollapse" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>			
+				<li class="active"><a href="#">Pricing</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">	
+				<li><a href="#" ><i class="fas fa-cog"></i></a></li>		
+				<li><a href="#" class="messages"><i class="fas fa-envelope"></i><span class="badge">10</span></a></li>	
+				<li>
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar" > <span sec:authentication="name"></span> <b class="caret"></b></a>
+					<ul class="dropdown-menu form-wrapper">					
+						<li>
+							<div class="form-group">
+								<a href="#" ><i class="fas fa-user"></i> Profilo</a>
+							</div>
+				    		<div class="form-group">
+								<a href="javascript: document.logoutForm.submit()" >
+					    			<i class="fas fa-sign-out-alt"></i> Logout
+					    		</a>
+							</div>
+				    	</li>				    	
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm"> 
+            <input type="submit" value="Logout"/> 
+        </form>
+	</nav>
+					
+    </body>
+</html>

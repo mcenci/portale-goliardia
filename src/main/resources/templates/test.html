@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Goliardia.it</title>
+    </head>
+    <body>
+        <h2>Welcome</h2>
+        <p>Goliardia.it</p>
+        <div sec:authorize="hasAuthority('read')">Text visible with read permission.</div>
+        <div sec:authorize="hasAuthority('role_write')">Text visible with write permission.</div>
+        <div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
+        </div>
+        Authenticated username:
+        <div sec:authentication="name"></div>
+        Authenticated user roles:
+        <div sec:authentication="principal.authorities"></div>
+        
+        <form th:action="@{/logout}" method="post"> 
+            <input type="submit" value="Logout"/> 
+        </form>
+            
+    </body>
+</html>

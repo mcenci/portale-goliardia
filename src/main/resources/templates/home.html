@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<link th:replace="fragments/head :: include-css">
+    </head>
+    <body>
+		<div th:replace="fragments/menu ::  ${#authentication.authenticated} ? 'loggedin-menu' : 'not-loggedin-menu'"></div>
+		
+		<div class="container">
+	        <h2>Welcome</h2>
+	        <p>Goliardia.it</p>
+	        <div sec:authorize="hasAuthority('read')">Text visible with read permission.</div>
+	        <div sec:authorize="hasAuthority('role_write')">Text visible with write permission.</div>
+	        <div sec:authorize="isAuthenticated()">
+	            Text visible only to authenticated users.
+	        </div>
+	        Authenticated username:
+	        <div sec:authentication="name"></div>
+	        Authenticated user roles:
+	        <div sec:authentication="principal.authorities"></div>
+		</div>
+        
+
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" th:src="@{/js/fontawesome.min.js}" ></script> 
+        <script type="text/javascript" th:src="@{/js/solid.min.js}" ></script> 
+        
+        <script>
+			// Prevent dropdown menu from closing when click inside the form
+			$(document).on("click", ".navbar-right .dropdown-menu", function(e){
+				e.stopPropagation();
+			});
+		</script>
+    </body>
+</html>

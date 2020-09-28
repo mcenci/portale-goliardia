@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="it.cenci.goliardia.mapper.UsersMapper">
+
+	<resultMap type="users" id="loggedInUser">
+		<result column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<collection column="authority" property="authoritiesList" javaType="List" ofType="string">
+	        <result property="authority" column="authority"/>
+	    </collection>
+	</resultMap>
+	
+	<select id="findByUsername" resultMap="loggedInUser">
+		select 
+			U.id,
+			U.username,
+			U.password,
+			A.authority
+		from 
+			users U join authorities A on U.id = A.userId
+		where
+			U.username = #{username}
+	</select>
+
+</mapper>
