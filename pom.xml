@@ -12,7 +12,7 @@
 
 	<groupId>it.cenci</groupId>
 	<artifactId>portale-goliardia</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-feature-user-registration-SNAPSHOT</version>
 	<name>portale-goliardia</name>
 	<description>Portale Goliardia.it</description>
 
