@@ -77,6 +77,23 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.amashchenko.maven.plugin</groupId>
+				<artifactId>gitflow-maven-plugin</artifactId>
+				<version>1.14.0</version>
+				<configuration>
+					<!-- don't push to remote, since we want to try things out locally -->
+					<pushRemote>true</pushRemote>
+					<fetchRemote>true</fetchRemote>
+					<keepBranch>true</keepBranch>
+					<!-- we use major.minor.patch versioning, being 0.1.2 respectively. 
+						By default the minor version is increased. Hotfixes increase the patch version. -->
+					<versionDigitToIncrement>${gitflowDigitToIncrement}</versionDigitToIncrement>
+					<gitFlowConfig>
+						<productionBranch>master</productionBranch>
+					</gitFlowConfig>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
